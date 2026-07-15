@@ -6,11 +6,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* --- 1. EMAILJS INIT --- */
-    // ⚠️ Remplacez les valeurs ci-dessous par vos propres IDs EmailJS
-    // (https://www.emailjs.com → Account → API Keys)
-    const EMAILJS_PUBLIC_KEY  = 'VOTRE_PUBLIC_KEY';   // ex: 'aB1cD2eF3gH4iJ5k'
-    const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';   // ex: 'service_xxxxxxx'
-    const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';  // ex: 'template_xxxxxxx'
+    const EMAILJS_PUBLIC_KEY  = 'VOTRE_PUBLIC_KEY';   // ⚠️ Remplacez ici
+    const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';   // ex: service_xxxxxxx
+    const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';  // ex: template_xxxxxxx
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
     /* --- 2. MOBILE MENU & STICKY NAV --- */
@@ -198,10 +196,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 statNumbers.forEach(el => {
                     const target = parseInt(el.getAttribute('data-target'), 10);
-                    const steps  = 60;
-                    const inc    = target / steps;
-                    let current  = 0;
-                    const timer  = setInterval(() => {
+                    const steps = 60;
+                    const inc = target / steps;
+                    let current = 0;
+                    const timer = setInterval(() => {
                         current = Math.min(current + inc, target);
                         el.textContent = Math.round(current);
                         if (current >= target) clearInterval(timer);
@@ -224,40 +222,37 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('contactForm').addEventListener('submit', e => {
         e.preventDefault();
-        const status  = document.getElementById('formStatus');
-        const btn     = e.target.querySelector('button[type="submit"]');
-        const isEn    = currentLang === 'en';
+        const status = document.getElementById('formStatus');
+        const btn    = e.target.querySelector('button[type="submit"]');
+        const isEn   = currentLang === 'en';
 
-        // Loading state
         btn.disabled = true;
         btn.textContent = isEn ? 'Sending…' : 'Envoi en cours…';
         status.textContent = '';
 
-        const templateParams = {
-            from_name:    document.getElementById('name').value,
-            from_email:   document.getElementById('email').value,
-            message:      document.getElementById('message').value,
-            to_email:     'kaelji929@gmail.com'
-        };
-
-        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
-            .then(() => {
-                status.textContent = isEn ? '✓ Thank you! Message sent.' : '✓ Merci ! Message envoyé.';
-                status.style.color = '#2e7d52';
-                e.target.reset();
-                setTimeout(() => { status.textContent = ''; }, 6000);
-            })
-            .catch(err => {
-                console.error('EmailJS error:', err);
-                status.textContent = isEn
-                    ? '✗ Send failed. Please try again or email directly.'
-                    : '✗ Échec de l\'envoi. Réessayez ou contactez-moi directement.';
-                status.style.color = '#c0392b';
-            })
-            .finally(() => {
-                btn.disabled = false;
-                btn.textContent = isEn ? 'Send Message' : 'Envoyer le message';
-            });
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            from_name:  document.getElementById('name').value,
+            from_email: document.getElementById('email').value,
+            message:    document.getElementById('message').value,
+            to_email:   'kaelji929@gmail.com'
+        })
+        .then(() => {
+            status.textContent = isEn ? '✓ Thank you! Message sent.' : '✓ Merci ! Message envoyé.';
+            status.style.color = '#2e7d52';
+            e.target.reset();
+            setTimeout(() => { status.textContent = ''; }, 6000);
+        })
+        .catch(err => {
+            console.error('EmailJS error:', err);
+            status.textContent = isEn
+                ? '✗ Send failed. Please email directly.'
+                : '✗ Échec. Contactez-moi directement.';
+            status.style.color = '#c0392b';
+        })
+        .finally(() => {
+            btn.disabled = false;
+            btn.textContent = isEn ? 'Send Message' : 'Envoyer le message';
+        });
     });
 
 });
@@ -320,26 +315,26 @@ function initThreeJSAnimation() {
 
     /* ── MATÉRIAUX ── */
     const M = {
-        wall:    new THREE.MeshStandardMaterial({ color: 0xe8dfd0, roughness: 0.9, metalness: 0.02 }),
-        wallB:   new THREE.MeshStandardMaterial({ color: 0xd4caba, roughness: 0.85, metalness: 0.02 }),
-        wallC:   new THREE.MeshStandardMaterial({ color: 0xc8d5d0, roughness: 0.88, metalness: 0.03 }),
+        wall: new THREE.MeshStandardMaterial({ color: 0xe8dfd0, roughness: 0.9, metalness: 0.02 }),
+        wallB: new THREE.MeshStandardMaterial({ color: 0xd4caba, roughness: 0.85, metalness: 0.02 }),
+        wallC: new THREE.MeshStandardMaterial({ color: 0xc8d5d0, roughness: 0.88, metalness: 0.03 }),
         roofRed: new THREE.MeshStandardMaterial({ color: 0xa04030, roughness: 0.8 }),
-        roofGray:new THREE.MeshStandardMaterial({ color: 0x8090a0, roughness: 0.75 }),
-        roofSlate:new THREE.MeshStandardMaterial({ color: 0x556677, roughness: 0.7 }),
-        glass:   new THREE.MeshStandardMaterial({ color: 0x90c0e8, roughness: 0.05, metalness: 0.7, transparent: true, opacity: 0.6 }),
-        frame:   new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5 }),
-        door:    new THREE.MeshStandardMaterial({ color: 0x5a3a1a, roughness: 0.7 }),
+        roofGray: new THREE.MeshStandardMaterial({ color: 0x8090a0, roughness: 0.75 }),
+        roofSlate: new THREE.MeshStandardMaterial({ color: 0x556677, roughness: 0.7 }),
+        glass: new THREE.MeshStandardMaterial({ color: 0x90c0e8, roughness: 0.05, metalness: 0.7, transparent: true, opacity: 0.6 }),
+        frame: new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5 }),
+        door: new THREE.MeshStandardMaterial({ color: 0x5a3a1a, roughness: 0.7 }),
         chimney: new THREE.MeshStandardMaterial({ color: 0xb87040, roughness: 0.9 }),
-        concrete:new THREE.MeshStandardMaterial({ color: 0xcdd6de, roughness: 0.85, metalness: 0.05 }),
-        glass2:  new THREE.MeshStandardMaterial({ color: 0xaad0ee, roughness: 0.05, metalness: 0.65, transparent: true, opacity: 0.5 }),
-        ground:  new THREE.MeshStandardMaterial({ color: 0xc8d4b8, roughness: 1 }),
-        road:    new THREE.MeshStandardMaterial({ color: 0x8890a0, roughness: 0.95 }),
-        sidewalk:new THREE.MeshStandardMaterial({ color: 0xd0c8bc, roughness: 0.9 }),
-        edge:    new THREE.LineBasicMaterial({ color: 0x4A6FA5, transparent: true, opacity: 0.6 }),
-        edgeG:   new THREE.LineBasicMaterial({ color: 0x88bbff, transparent: true, opacity: 0.35 }),
+        concrete: new THREE.MeshStandardMaterial({ color: 0xcdd6de, roughness: 0.85, metalness: 0.05 }),
+        glass2: new THREE.MeshStandardMaterial({ color: 0xaad0ee, roughness: 0.05, metalness: 0.65, transparent: true, opacity: 0.5 }),
+        ground: new THREE.MeshStandardMaterial({ color: 0xc8d4b8, roughness: 1 }),
+        road: new THREE.MeshStandardMaterial({ color: 0x8890a0, roughness: 0.95 }),
+        sidewalk: new THREE.MeshStandardMaterial({ color: 0xd0c8bc, roughness: 0.9 }),
+        edge: new THREE.LineBasicMaterial({ color: 0x4A6FA5, transparent: true, opacity: 0.6 }),
+        edgeG: new THREE.LineBasicMaterial({ color: 0x88bbff, transparent: true, opacity: 0.35 }),
         balcony: new THREE.MeshStandardMaterial({ color: 0xbfc8c8, roughness: 0.7, metalness: 0.2 }),
         foliage: new THREE.MeshStandardMaterial({ color: 0x4a8040, roughness: 1 }),
-        trunk:   new THREE.MeshStandardMaterial({ color: 0x8b5e3c, roughness: 1 }),
+        trunk: new THREE.MeshStandardMaterial({ color: 0x8b5e3c, roughness: 1 }),
     };
 
     /* ── HELPERS ── */
@@ -395,7 +390,7 @@ function initThreeJSAnimation() {
        Corps + toit en pente (prisme) + cheminée + fenêtres + porte + garage éventuel */
     function makeHouse(opts) {
         const { x, z, w = 8, d = 6, h = 4, wallMat = M.wall, roofMat = M.roofRed,
-                hasGarage = false, hasChimney = true, angle = 0 } = opts;
+            hasGarage = false, hasChimney = true, angle = 0 } = opts;
         const group = new THREE.Group();
         group.position.set(x, 0, z);
         group.rotation.y = angle;
@@ -485,7 +480,7 @@ function initThreeJSAnimation() {
        Étages superposés avec fenêtres et balcons */
     function makeApartmentBlock(opts) {
         const { x, z, w = 9, d = 7, floors = 5, wallMat = M.concrete,
-                hasBalcony = true, angle = 0 } = opts;
+            hasBalcony = true, angle = 0 } = opts;
         const group = new THREE.Group();
         group.position.set(x, 0, z);
         group.rotation.y = angle;
@@ -590,10 +585,10 @@ function initThreeJSAnimation() {
 
             // Façade vitrée 4 côtés
             const panelDefs = [
-                { rx: 0,         rz: fd / 2,     ww: fw, hh: floorH - 0.15 },
-                { rx: 0,         rz: -fd / 2,    ww: fw, hh: floorH - 0.15 },
-                { rx: -fw / 2,   rz: 0,          ww: fd, hh: floorH - 0.15, rot: true },
-                { rx: fw / 2,    rz: 0,          ww: fd, hh: floorH - 0.15, rot: true },
+                { rx: 0, rz: fd / 2, ww: fw, hh: floorH - 0.15 },
+                { rx: 0, rz: -fd / 2, ww: fw, hh: floorH - 0.15 },
+                { rx: -fw / 2, rz: 0, ww: fd, hh: floorH - 0.15, rot: true },
+                { rx: fw / 2, rz: 0, ww: fd, hh: floorH - 0.15, rot: true },
             ];
             panelDefs.forEach(pd => {
                 const g = new THREE.BoxGeometry(pd.ww, pd.hh, 0.18);
@@ -680,7 +675,7 @@ function initThreeJSAnimation() {
     // Arbres le long des trottoirs
     const treePositions = [
         [-9, -18], [-9, -10], [-9, 0], [-9, 10], [-9, 20],
-        [ 9, -18], [ 9, -10], [ 9, 0], [ 9, 10], [ 9, 20],
+        [9, -18], [9, -10], [9, 0], [9, 10], [9, 20],
     ];
     treePositions.forEach(([tx, tz]) => makeTree(tx, tz, 3.5 + Math.random() * 2));
 
@@ -700,9 +695,9 @@ function initThreeJSAnimation() {
     function spawnDust(x, y, z, n) {
         for (let i = 0; i < n; i++) {
             const idx = nextP++ % MAX_P;
-            pPos[idx*3]   = x + (Math.random() - .5) * 6;
-            pPos[idx*3+1] = y + Math.random();
-            pPos[idx*3+2] = z + (Math.random() - .5) * 6;
+            pPos[idx * 3] = x + (Math.random() - .5) * 6;
+            pPos[idx * 3 + 1] = y + Math.random();
+            pPos[idx * 3 + 2] = z + (Math.random() - .5) * 6;
             pVel[idx] = { x: (Math.random() - .5) * .09, y: Math.random() * .13 + .02, z: (Math.random() - .5) * .09 };
             pLife[idx] = 1.0; pOn[idx] = 1;
         }
@@ -712,10 +707,10 @@ function initThreeJSAnimation() {
         for (let i = 0; i < MAX_P; i++) {
             if (!pOn[i]) continue;
             pLife[i] -= 0.016;
-            if (pLife[i] <= 0) { pOn[i] = 0; pPos[i*3+1] = -100; continue; }
-            pPos[i*3]   += pVel[i].x;
-            pPos[i*3+1] += pVel[i].y;
-            pPos[i*3+2] += pVel[i].z;
+            if (pLife[i] <= 0) { pOn[i] = 0; pPos[i * 3 + 1] = -100; continue; }
+            pPos[i * 3] += pVel[i].x;
+            pPos[i * 3 + 1] += pVel[i].y;
+            pPos[i * 3 + 2] += pVel[i].z;
             pVel[i].y -= 0.003;
         }
         pGeo.attributes.position.needsUpdate = true;
@@ -728,8 +723,8 @@ function initThreeJSAnimation() {
     let isIdle = false;
 
     const camStart = new THREE.Vector3(0, -6, 110);
-    const camEnd   = new THREE.Vector3(38, 28, 55);
-    const INTRO    = 200;
+    const camEnd = new THREE.Vector3(38, 28, 55);
+    const INTRO = 200;
     camera.position.copy(camStart);
 
     function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
@@ -880,9 +875,9 @@ function initService3DIcons() {
         scene.add(modelGroup);
 
         const edgeMaterial = new THREE.LineBasicMaterial({ color: colorSecondary, transparent: true, opacity: 0.8 });
-        const faceMaterial = new THREE.MeshStandardMaterial({ 
-            color: colorPrimary, 
-            roughness: 0.2, 
+        const faceMaterial = new THREE.MeshStandardMaterial({
+            color: colorPrimary,
+            roughness: 0.2,
             metalness: 0.8,
             transparent: true,
             opacity: 0.25,
@@ -931,17 +926,17 @@ function initService3DIcons() {
         } else if (index === 1) {
             // RÉNOVATION & RESTRUCTURATION: Steel truss / I-beam
             const beamGroup = new THREE.Group();
-            
+
             // Top flange
             const topFlange = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.15, 0.8), metalMaterial);
             topFlange.position.y = 0.6;
             beamGroup.add(topFlange);
-            
+
             // Bottom flange
             const bottomFlange = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.15, 0.8), metalMaterial);
             bottomFlange.position.y = -0.6;
             beamGroup.add(bottomFlange);
-            
+
             // Web linking them
             const web = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.05, 0.15), faceMaterial);
             beamGroup.add(web);
@@ -953,7 +948,7 @@ function initService3DIcons() {
             topFlange.add(beamWire1);
             const beamWire2 = new THREE.LineSegments(new THREE.EdgesGeometry(bottomFlange.geometry), edgeMaterial);
             bottomFlange.add(beamWire2);
-            
+
             modelGroup.add(beamGroup);
             modelGroup.rotation.z = Math.PI * 0.15;
 
@@ -970,7 +965,7 @@ function initService3DIcons() {
             }));
             baseMesh.position.y = -0.85;
             coneGroup.add(baseMesh);
-            
+
             const baseWire = new THREE.LineSegments(new THREE.EdgesGeometry(baseGeo), edgeMaterial);
             baseMesh.add(baseWire);
 
@@ -1011,7 +1006,7 @@ function initService3DIcons() {
             const coreEdges = new THREE.LineSegments(new THREE.EdgesGeometry(coreGeo), new THREE.LineBasicMaterial({ color: 0xffffff }));
             coreMesh.add(coreEdges);
             globeGroup.add(coreMesh);
-            
+
             globeGroup.userData = { core: coreMesh };
             modelGroup.add(globeGroup);
         }
@@ -1084,7 +1079,7 @@ function initService3DIcons() {
 
         // Success state: hide the CSS icon, show canvas
         wrap.classList.add('has-3d');
-        
+
         // Start ticks
         tick();
     });
@@ -1110,7 +1105,7 @@ function initProject3DScenes() {
 
     configs.forEach(({ canvasId, wrapId, type }) => {
         const canvas = document.getElementById(canvasId);
-        const wrap   = document.getElementById(wrapId);
+        const wrap = document.getElementById(wrapId);
         if (!canvas || !wrap) return;
 
         const W = wrap.clientWidth || 400;
@@ -1144,7 +1139,7 @@ function initProject3DScenes() {
         scene.add(fillLight);
 
         /* ── Helpers ── */
-        const edgeMat  = new THREE.LineBasicMaterial({ color: 0x88bbff, transparent: true, opacity: 0.55 });
+        const edgeMat = new THREE.LineBasicMaterial({ color: 0x88bbff, transparent: true, opacity: 0.55 });
         const glassMat = new THREE.MeshStandardMaterial({ color: 0x90c8ff, roughness: 0.05, metalness: 0.8, transparent: true, opacity: 0.45, side: THREE.DoubleSide });
         const concreteMat = new THREE.MeshStandardMaterial({ color: 0xd0d8e4, roughness: 0.85, metalness: 0.08 });
         const darkMat = new THREE.MeshStandardMaterial({ color: 0x2C3E50, roughness: 0.7, metalness: 0.4 });
@@ -1152,7 +1147,7 @@ function initProject3DScenes() {
         const foliageMat = new THREE.MeshStandardMaterial({ color: 0x2d7040, roughness: 1 });
         const trunkMat = new THREE.MeshStandardMaterial({ color: 0x7a4c28, roughness: 1 });
         const whiteMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2, metalness: 0.5 });
-        const glowMat  = new THREE.MeshStandardMaterial({ color: 0x4488ff, emissive: 0x2244aa, roughness: 0.1, metalness: 0.9, transparent: true, opacity: 0.75 });
+        const glowMat = new THREE.MeshStandardMaterial({ color: 0x4488ff, emissive: 0x2244aa, roughness: 0.1, metalness: 0.9, transparent: true, opacity: 0.75 });
 
         function box(w, h, d, mat) {
             const g = new THREE.BoxGeometry(w, h, d);
@@ -1181,7 +1176,7 @@ function initProject3DScenes() {
         const pCount = 120;
         const pPositions = new Float32Array(pCount * 3);
         for (let i = 0; i < pCount; i++) {
-            pPositions[i * 3]     = (Math.random() - 0.5) * 30;
+            pPositions[i * 3] = (Math.random() - 0.5) * 30;
             pPositions[i * 3 + 1] = Math.random() * 15;
             pPositions[i * 3 + 2] = (Math.random() - 0.5) * 20;
         }
@@ -1196,154 +1191,154 @@ function initProject3DScenes() {
 
         if (type === 'office') {
             /* Immeuble R+4 personnalisé correspondant à la photo de réalisation */
-            const wallGrey  = new THREE.MeshStandardMaterial({ color: 0x767d8a, roughness: 0.75, metalness: 0.05 });
-            const wallWood  = new THREE.MeshStandardMaterial({ color: 0xd9865d, roughness: 0.6, metalness: 0.05 });
-            const wallPink  = new THREE.MeshStandardMaterial({ color: 0xf5b2a3, roughness: 0.7, metalness: 0.05 });
+            const wallGrey = new THREE.MeshStandardMaterial({ color: 0x767d8a, roughness: 0.75, metalness: 0.05 });
+            const wallWood = new THREE.MeshStandardMaterial({ color: 0xd9865d, roughness: 0.6, metalness: 0.05 });
+            const wallPink = new THREE.MeshStandardMaterial({ color: 0xf5b2a3, roughness: 0.7, metalness: 0.05 });
             const wallGreen = new THREE.MeshStandardMaterial({ color: 0xcbeef3, roughness: 0.8, metalness: 0.02 });
-            const glowCyan  = new THREE.MeshBasicMaterial({ color: 0x00f3ff });
+            const glowCyan = new THREE.MeshBasicMaterial({ color: 0x00f3ff });
             const glowYellow = new THREE.MeshBasicMaterial({ color: 0xfff0aa });
-            
+
             // Adjust scene fog to be lighter so details are visible
             if (scene.fog) {
                 scene.fog.density = 0.038;
             }
-            
+
             // Hide generic scene ground and grid to let our custom environment shine
             ground.visible = false;
             grid.visible = false;
-            
+
             const bW = 7.5;
             const bD = 5.5;
-            
+
             /* 1. Rez-de-chaussée (RC) - y-range: [0, 2.7] */
             const groundFloor = wireBox(box(bW, 2.7, bD, wallGrey));
             groundFloor.position.y = 1.35;
             pivot.add(groundFloor);
-            
+
             // Portail coulissant gris/métal sur la droite
             const gate = wireBox(box(2.2, 1.8, 0.1, new THREE.MeshStandardMaterial({ color: 0xd0d5dd, roughness: 0.35, metalness: 0.75 })));
-            gate.position.set(1.5, 0.9, bD/2 + 0.06);
+            gate.position.set(1.5, 0.9, bD / 2 + 0.06);
             pivot.add(gate);
-            
+
             // Poteaux du portail
             const post1 = box(0.2, 2.0, 0.2, concreteMat);
-            post1.position.set(0.3, 1.0, bD/2 + 0.08);
+            post1.position.set(0.3, 1.0, bD / 2 + 0.08);
             pivot.add(post1);
             const post2 = box(0.2, 2.0, 0.2, concreteMat);
-            post2.position.set(2.7, 1.0, bD/2 + 0.08);
+            post2.position.set(2.7, 1.0, bD / 2 + 0.08);
             pivot.add(post2);
-            
+
             /* 2. Étages intermédiaires (1 à 3) */
             const fH = 2.45;
             for (let f = 0; f < 3; f++) {
                 const fy = 2.7 + f * fH;
-                
+
                 // Bloc de gauche solide gris (3.5 de large)
                 const leftBlock = wireBox(box(3.5, fH - 0.05, bD, wallGrey));
-                leftBlock.position.set(-2.0, fy + fH/2, 0);
+                leftBlock.position.set(-2.0, fy + fH / 2, 0);
                 pivot.add(leftBlock);
-                
+
                 // Bloc de fond arrière-droit gris (pour éviter que le bâtiment soit creux)
                 const backBlock = wireBox(box(4.0, fH - 0.05, 3.9, wallGrey));
-                backBlock.position.set(1.75, fy + fH/2, -bD/2 + 1.95);
+                backBlock.position.set(1.75, fy + fH / 2, -bD / 2 + 1.95);
                 pivot.add(backBlock);
-                
+
                 // Colonne saumon verticale de la façade avant (1.2 de large, 0.8 de profondeur)
                 const pinkCol = wireBox(box(1.2, fH - 0.05, 0.8, wallPink));
-                pinkCol.position.set(1.1, fy + fH/2, bD/2 - 0.36);
+                pinkCol.position.set(1.1, fy + fH / 2, bD / 2 - 0.36);
                 pivot.add(pinkCol);
-                
+
                 // Fenêtre de la colonne saumon (qui brille en jaune de l'intérieur)
                 const pWin = box(0.5, 1.4, 0.1, glowYellow);
-                pWin.position.set(1.1, fy + fH/2, bD/2 + 0.06);
+                pWin.position.set(1.1, fy + fH / 2, bD / 2 + 0.06);
                 pivot.add(pWin);
-                
+
                 // Balcons/loggias en bois à droite (2.5 de large, 1.6 de profondeur)
                 // Mur de fond de la loggia (vert clair/bleuté)
                 const loggiaBack = wireBox(box(2.5, fH - 0.05, 1.6, wallGreen));
-                loggiaBack.position.set(2.5, fy + fH/2, bD/2 - 1.1);
+                loggiaBack.position.set(2.5, fy + fH / 2, bD / 2 - 1.1);
                 pivot.add(loggiaBack);
-                
+
                 // Fenêtres intérieures de la loggia (jaunes lumineuses)
                 const loggiaWin = box(1.2, fH - 0.8, 0.05, glowYellow);
-                loggiaWin.position.set(2.5, fy + fH/2, bD/2 - 0.4);
+                loggiaWin.position.set(2.5, fy + fH / 2, bD / 2 - 0.4);
                 pivot.add(loggiaWin);
-                
+
                 // Cadre boisé extérieur du balcon (autour de la loggia)
                 const outerWood = wireBox(box(2.6, fH - 0.05, 0.15, wallWood));
-                outerWood.position.set(2.5, fy + fH/2, bD/2 - 0.08);
+                outerWood.position.set(2.5, fy + fH / 2, bD / 2 - 0.08);
                 pivot.add(outerWood);
-                
+
                 // Fenêtre vitrée latérale gauche
                 const sideWin1 = box(0.1, 1.2, 0.8, glassMat);
-                sideWin1.position.set(-3.76, fy + fH/2, 1.0);
+                sideWin1.position.set(-3.76, fy + fH / 2, 1.0);
                 pivot.add(sideWin1);
-                
+
                 const sideWin2 = box(0.1, 1.2, 0.8, glassMat);
-                sideWin2.position.set(-3.76, fy + fH/2, -1.0);
+                sideWin2.position.set(-3.76, fy + fH / 2, -1.0);
                 pivot.add(sideWin2);
             }
-            
+
             /* 3. Dernier étage (Attique / Penthouse) */
             const pty = 2.7 + 3 * fH;
             const ptH = 2.4;
-            
+
             // Partie gauche fermée grise (chambre haute)
             const ptLeft = wireBox(box(4.5, ptH - 0.05, bD * 0.8, wallGrey));
-            ptLeft.position.set(-1.5, pty + ptH/2, -bD * 0.1);
+            ptLeft.position.set(-1.5, pty + ptH / 2, -bD * 0.1);
             pivot.add(ptLeft);
-            
+
             // Fenêtre de la partie haute (lumineuse)
             const ptWin = box(1.0, 1.2, 0.08, glowYellow);
-            ptWin.position.set(-1.5, pty + ptH/2, bD * 0.31);
+            ptWin.position.set(-1.5, pty + ptH / 2, bD * 0.31);
             pivot.add(ptWin);
-            
+
             // Partie droite ouverte (terrasse pergola avec poteaux blancs)
             const col1 = box(0.18, ptH, 0.18, whiteMat);
-            col1.position.set(3.4, pty + ptH/2, bD/2 - 0.3);
+            col1.position.set(3.4, pty + ptH / 2, bD / 2 - 0.3);
             pivot.add(col1);
-            
+
             const col2 = box(0.18, ptH, 0.18, whiteMat);
-            col2.position.set(3.4, pty + ptH/2, -bD/2 + 0.3);
+            col2.position.set(3.4, pty + ptH / 2, -bD / 2 + 0.3);
             pivot.add(col2);
-            
+
             const col3 = box(0.18, ptH, 0.18, whiteMat);
-            col3.position.set(1.4, pty + ptH/2, bD/2 - 0.3);
+            col3.position.set(1.4, pty + ptH / 2, bD / 2 - 0.3);
             pivot.add(col3);
-            
+
             // Garde-corps en verre
             const balustrade = box(3.0, 0.9, 0.05, glassMat);
-            balustrade.position.set(2.1, pty + 0.45, bD/2 - 0.15);
+            balustrade.position.set(2.1, pty + 0.45, bD / 2 - 0.15);
             pivot.add(balustrade);
-            
+
             // Casquette de la pergola
             const canopy = wireBox(box(3.8, 0.35, bD * 0.9, wallGrey));
             canopy.position.set(1.9, pty + ptH - 0.125, -bD * 0.05);
             pivot.add(canopy);
-            
+
             // Bandeau de lumière cyan brillant (caractéristique du bâtiment)
             const cyanBand = new THREE.Mesh(new THREE.BoxGeometry(3.9, 0.15, bD * 0.92), glowCyan);
             cyanBand.position.set(1.9, pty + ptH + 0.1, -bD * 0.05);
             pivot.add(cyanBand);
-            
+
             // Toit principal gauche
             const ptRoof = wireBox(box(4.6, 0.2, bD * 0.85, wallGrey));
             ptRoof.position.set(-1.5, pty + ptH + 0.1, -bD * 0.1);
             pivot.add(ptRoof);
-            
+
             /* 4. Environnement (Rue, Voiture blanche, Voiture rouge, Espaces verts) */
             // Route
             const street = new THREE.Mesh(new THREE.PlaneGeometry(16, 7.5), new THREE.MeshStandardMaterial({ color: 0x42474e, roughness: 0.85 }));
             street.rotation.x = -Math.PI / 2;
-            street.position.set(0, 0.02, bD/2 + 3.0);
+            street.position.set(0, 0.02, bD / 2 + 3.0);
             pivot.add(street);
-            
+
             // Trottoir
             const walk = new THREE.Mesh(new THREE.PlaneGeometry(12, 1.8), new THREE.MeshStandardMaterial({ color: 0xd2ccbd, roughness: 0.9 }));
             walk.rotation.x = -Math.PI / 2;
-            walk.position.set(0.5, 0.03, bD/2 + 0.9);
+            walk.position.set(0.5, 0.03, bD / 2 + 0.9);
             pivot.add(walk);
-            
+
             // Voiture blanche stylisée (avec roues noires)
             const carW = new THREE.Group();
             const carWBody = box(1.8, 0.45, 0.85, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.25, metalness: 0.65 }));
@@ -1352,7 +1347,7 @@ function initProject3DScenes() {
             const carWCabin = box(0.95, 0.35, 0.75, glassMat);
             carWCabin.position.set(-0.1, 0.65, 0);
             carW.add(carWCabin);
-            
+
             // Roues voiture blanche
             [-0.5, 0.5].forEach(cx => {
                 [-0.43, 0.43].forEach(cz => {
@@ -1362,11 +1357,11 @@ function initProject3DScenes() {
                     carW.add(wheel);
                 });
             });
-            
-            carW.position.set(2.2, 0.04, bD/2 + 2.4);
+
+            carW.position.set(2.2, 0.04, bD / 2 + 2.4);
             carW.rotation.y = -Math.PI / 10;
             pivot.add(carW);
-            
+
             // Voiture rouge stylisée (avec roues noires)
             const carR = new THREE.Group();
             const carRBody = box(1.7, 0.45, 0.8, new THREE.MeshStandardMaterial({ color: 0xb52222, roughness: 0.25, metalness: 0.65 }));
@@ -1375,7 +1370,7 @@ function initProject3DScenes() {
             const carRCabin = box(0.9, 0.35, 0.7, glassMat);
             carRCabin.position.set(-0.1, 0.65, 0);
             carR.add(carRCabin);
-            
+
             // Roues voiture rouge
             [-0.48, 0.48].forEach(cx => {
                 [-0.4, 0.4].forEach(cz => {
@@ -1385,25 +1380,25 @@ function initProject3DScenes() {
                     carR.add(wheel);
                 });
             });
-            
-            carR.position.set(-1.6, 0.04, bD/2 + 4.0);
+
+            carR.position.set(-1.6, 0.04, bD / 2 + 4.0);
             carR.rotation.y = Math.PI / 8;
             pivot.add(carR);
-            
+
             // Pelouse et arbre à gauche
             const grass = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), new THREE.MeshStandardMaterial({ color: 0x7da470, roughness: 1.0 }));
             grass.rotation.x = -Math.PI / 2;
-            grass.position.set(-6.5, 0.02, bD/2 + 2.0);
+            grass.position.set(-6.5, 0.02, bD / 2 + 2.0);
             pivot.add(grass);
-            
+
             const treeTrunk = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.1, 1.1, 5), trunkMat);
-            treeTrunk.position.set(-6.0, 0.55, bD/2 + 2.0);
+            treeTrunk.position.set(-6.0, 0.55, bD / 2 + 2.0);
             pivot.add(treeTrunk);
-            
+
             const treeFoliage = new THREE.Mesh(new THREE.IcosahedronGeometry(0.7, 0), foliageMat);
-            treeFoliage.position.set(-6.0, 1.5, bD/2 + 2.0);
+            treeFoliage.position.set(-6.0, 1.5, bD / 2 + 2.0);
             pivot.add(treeFoliage);
-            
+
             // Ajustement de l'échelle et de la pose pour faire rentrer tout le modèle (bâtiment, rue et voitures) dans le cadre sans coupure
             pivot.scale.set(0.70, 0.70, 0.70);
             pivot.rotation.y = -Math.PI / 5;
@@ -1549,17 +1544,17 @@ function initProject3DScenes() {
    ═══════════════════════════════════════════════════ */
 function initProjectCarousels() {
     document.querySelectorAll('.project-carousel').forEach(carousel => {
-        const track   = carousel.querySelector('.carousel-track');
-        const images  = Array.from(track.querySelectorAll('img'));
+        const track = carousel.querySelector('.carousel-track');
+        const images = Array.from(track.querySelectorAll('img'));
         const dotsWrap = carousel.querySelector('.carousel-dots');
-        const prevBtn  = carousel.querySelector('.carousel-prev');
-        const nextBtn  = carousel.querySelector('.carousel-next');
+        const prevBtn = carousel.querySelector('.carousel-prev');
+        const nextBtn = carousel.querySelector('.carousel-next');
 
         if (!images.length) return;
 
-        let current   = 0;
-        let timer     = null;
-        const DELAY   = 4000;
+        let current = 0;
+        let timer = null;
+        const DELAY = 4000;
 
         /* Build dot buttons */
         images.forEach((_, i) => {
