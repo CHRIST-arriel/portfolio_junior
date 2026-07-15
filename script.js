@@ -6,7 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* --- 1. EMAILJS INIT --- */
-    const EMAILJS_PUBLIC_KEY = '0K3ghGkZulrO-geiC';   // ⚠️ Remplacez ici
+    const EMAILJS_PUBLIC_KEY = 'jS86s9Jpg2C_U4eLH';   // ⚠️ Remplacez ici
     const EMAILJS_SERVICE_ID = 'service_karc18794';   // ex: service_xxxxxxx
     const EMAILJS_TEMPLATE_ID = 'template_abfeswi';  // ex: template_xxxxxxx
     emailjs.init(EMAILJS_PUBLIC_KEY);
@@ -244,9 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(err => {
                 console.error('EmailJS error:', err);
-                status.textContent = isEn
-                    ? '✗ Send failed. Please email directly.'
-                    : '✗ Échec. Contactez-moi directement.';
+                // Affiche l'erreur exacte renvoyée par le serveur
+                const errMsg = err.text || err.message || JSON.stringify(err);
+                status.textContent = 'Erreur détaillée : ' + errMsg;
                 status.style.color = '#c0392b';
             })
             .finally(() => {
