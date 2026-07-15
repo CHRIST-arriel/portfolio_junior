@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KONAN LEON JUNIOR — Ingénieur Bâtiment & Génie Civil</title>
+    <meta name="description"
+        content="Portfolio de KONAN LEON JUNIOR, Ingénieur Bâtiment & Génie Civil — structures durables, rigueur technique et vision innovante.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Raleway:wght@700;800;900&family=DM+Serif+Display&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="custom-cursor"></div>
+    <div class="cursor-dot" id="custom-cursor-dot"></div>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">KLJ<span>.</span></a>
+            <div class="nav-links">
+                <a href="#about" data-i18n="navAbout">À propos</a>
+                <a href="#skills" data-i18n="navSkills">Compétences</a>
+                <a href="#projects" data-i18n="navProjects">Projets</a>
+                <a href="#services" data-i18n="navServices">Services</a>
+                <a href="#contact" data-i18n="navContact" class="contact-btn">Contact</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" data-lang="fr">FR</button>
+                    <span>|</span>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero">
+        <canvas id="three-canvas"></canvas>
+        <!-- Decorative grid lines -->
+        <div class="hero-grid-lines" aria-hidden="true">
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge"><span></span> <span data-i18n="heroBadge">Ingénieur Bâtiment & Génie Civil</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="hero-name">KONAN</span>
+                <span class="hero-name accent">LEON JUNIOR</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="heroSubtitle">Réaliser des structures durables, alliant rigueur
+                technique et vision innovante.</p>
+            <div class="hero-ctas">
+                <a href="#projects" class="btn btn-primary" data-i18n="btnProjects">Voir mes projets</a>
+                <a href="#contact" class="btn btn-outline" data-i18n="btnContact">Me contacter</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about section-pad">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow" data-i18n="aboutEyebrow">Qui suis-je ?</p>
+                <h2 data-i18n="aboutTitle">À propos de moi</h2>
+                <div class="line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-image-col">
+                    <div class="about-image">
+                        <div class="img-placeholder">
+                            <img src="./Gemini_Generated_Image_e6rn8ye6rn8ye6rn.png"
+                                alt="KONAN LEON JUNIOR — Ingénieur Bâtiment">
+                        </div>
+                        <!-- Floating experience badge -->
+                        <div class="exp-badge">
+                            <span class="exp-number">3+</span>
+                            <span class="exp-label" data-i18n="expLabel">ans d'expérience</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <p data-i18n="aboutP1">Fort de 3 années d'expérience en ingénierie civile, je me spécialise dans la
+                        conception et le suivi de projets de construction complexes. Ma philosophie : la qualité doit
+                        toujours primer sur la quantité.</p>
+                    <p data-i18n="aboutP2">J'accompagne les entreprises et les particuliers pour concrétiser leurs
+                        visions architecturales tout en garantissant la sécurité, l'optimisation des coûts et le respect
+                        des délais.</p>
+
+                    <!-- Stats row -->
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="20">0</span><span class="stat-suffix">+</span>
+                            <span class="stat-label" data-i18n="statProjects">Projets livrés</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="98">0</span><span class="stat-suffix">%</span>
+                            <span class="stat-label" data-i18n="statSatisfaction">Satisfaction client</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span>
+                            <span class="stat-label" data-i18n="statYears">Ans d'expérience</span>
+                        </div>
+                    </div>
+
+                    <div class="values">
+                        <div class="value-item">
+                            <i class="fas fa-check-circle"></i> <span data-i18n="value1">Rigueur</span>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-lightbulb"></i> <span data-i18n="value2">Innovation</span>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-hard-hat"></i> <span data-i18n="value3">Terrain</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section-pad bg-concrete">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow" data-i18n="skillsEyebrow">Expertise</p>
+                <h2 data-i18n="skillsTitle">Mes Compétences</h2>
+                <div class="line"></div>
+            </div>
+            <div class="skills-grid">
+                <!-- Technical Skills -->
+                <div class="skills-card">
+                    <h3 data-i18n="skillsTechTitle"><i class="fas fa-tools"></i> Techniques</h3>
+                    <div class="skill-bar">
+                        <div class="skill-info"><span>Structure & Béton Armé</span><span>95%</span></div>
+                        <div class="progress-wrap">
+                            <div class="progress" data-width="95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info"><span>AutoCAD / ArchiCAD </span><span>90%</span></div>
+                        <div class="progress-wrap">
+                            <div class="progress" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info"><span>Topographie</span><span>85%</span></div>
+                        <div class="progress-wrap">
+                            <div class="progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Soft Skills -->
+                <div class="skills-card">
+                    <h3 data-i18n="skillsSoftTitle"><i class="fas fa-users"></i> Qualités Humaines</h3>
+                    <ul class="soft-skills-list">
+                        <li><i class="fas fa-tasks"></i> <span data-i18n="soft1">Gestion complète de chantier</span>
+                        </li>
+                        <li><i class="fas fa-comments"></i> <span data-i18n="soft2">Coordination d'équipes et
+                                sous-traitants</span></li>
+                        <li><i class="fas fa-clock"></i> <span data-i18n="soft3">Respect strict des délais</span></li>
+                        <li><i class="fas fa-shield-alt"></i> <span data-i18n="soft4">Culture de la sécurité
+                                (HSE)</span></li>
+                        <li><i class="fas fa-search"></i> <span data-i18n="soft5">Résolution de problèmes
+                                complexes</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section-pad">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow" data-i18n="projectsEyebrow">Portfolio</p>
+                <h2 data-i18n="projectsTitle">Réalisations Récentes</h2>
+                <p class="subtitle" data-i18n="projectsSubtitle">Une sélection de travaux mettant en valeur mon
+                    expertise technique.</p>
+                <div class="line"></div>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-carousel" data-carousel="1">
+                        <div class="carousel-track">
+                            <img src="./assets/images_r4/WhatsApp Image 2026-07-03 at 14.32.12.jpeg"
+                                alt="Bâtiment R+4 vue 1" loading="lazy">
+                            <img src="./assets/images_r4/WhatsApp Image 2026-07-03 at 14.32.12 (1).jpeg"
+                                alt="Bâtiment R+4 vue 2" loading="lazy">
+                            <img src="./assets/images_r4/WhatsApp Image 2026-07-03 at 14.32.12 (2).jpeg"
+                                alt="Bâtiment R+4 vue 3" loading="lazy">
+                            <img src="./assets/images_r4/WhatsApp Image 2026-07-03 at 14.32.13 (1).jpeg"
+                                alt="Bâtiment R+4 vue 4" loading="lazy">
+                        </div>
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-badge"><i class="fas fa-building"></i> R+4</div>
+                        <button class="carousel-arrow carousel-prev" aria-label="Précédent"><i
+                                class="fas fa-chevron-left"></i></button>
+                        <button class="carousel-arrow carousel-next" aria-label="Suivant"><i
+                                class="fas fa-chevron-right"></i></button>
+                        <div class="carousel-dots"></div>
+                    </div>
+                    <div class="project-body">
+                        <span class="badge" data-i18n="proj1Type">Construction Neuve</span>
+                        <h3 data-i18n="proj1Title">bâtiment administratif R+4</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-i18n="proj1Loc">riviera,
+                                Côte d'ivoire</span></p>
+                        <p class="desc" data-i18n="proj1Desc">Suivi complet de la structure en béton armé pour un
+                            immeuble de 4 étages. Coordination des plannings et contrôle qualité.</p>
+                        <div class="project-tags"><span>Béton armé</span><span>R+4</span><span>Planning</span></div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-carousel" data-carousel="2">
+                        <div class="carousel-track">
+                            <img src="./assets/images_villa/WhatsApp Image 2026-07-02 at 21.55.11.jpeg"
+                                alt="Villa Duplex vue 1" loading="lazy">
+                            <img src="./assets/images_villa/WhatsApp Image 2026-07-02 at 21.55.12.jpeg"
+                                alt="Villa Duplex vue 2" loading="lazy">
+                            <img src="./assets/images_villa/WhatsApp Image 2026-07-02 at 21.55.13.jpeg"
+                                alt="Villa Duplex vue 3" loading="lazy">
+                            <img src="./assets/images_villa/WhatsApp Image 2026-07-02 at 21.55.14.jpeg"
+                                alt="Villa Duplex vue 4" loading="lazy">
+                        </div>
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-badge"><i class="fas fa-home"></i> Duplex</div>
+                        <button class="carousel-arrow carousel-prev" aria-label="Précédent"><i
+                                class="fas fa-chevron-left"></i></button>
+                        <button class="carousel-arrow carousel-next" aria-label="Suivant"><i
+                                class="fas fa-chevron-right"></i></button>
+                        <div class="carousel-dots"></div>
+                    </div>
+                    <div class="project-body">
+                        <span class="badge" data-i18n="proj2Type">Construction Neuve</span>
+                        <h3 data-i18n="proj2Title">villa duplex</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-i18n="proj2Loc">Djorobité,
+                                Côte d'ivoire</span></p>
+                        <p class="desc" data-i18n="proj2Desc">Supervision du gros œuvre et coordination des corps d'état
+                            secondaires pour la construction d'une villa duplex résidentielle.</p>
+                        <div class="project-tags"><span>Bâtiment</span><span>Duplex</span><span>Second œuvre</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-carousel" data-carousel="3">
+                        <div class="carousel-track">
+                            <img src="./assets/images_clinique/IMG_2360.JPG.jpeg" alt="Clinique vue 1" loading="lazy">
+                            <img src="./assets/images_clinique/IMG_2361.JPG.jpeg" alt="Clinique vue 2" loading="lazy">
+                            <img src="./assets/images_clinique/IMG_2362.JPG.jpeg" alt="Clinique vue 3" loading="lazy">
+                            <img src="./assets/images_clinique/IMG_2363.JPG.jpeg" alt="Clinique vue 4" loading="lazy">
+                            <img src="./assets/images_clinique/IMG_2364.JPG.jpeg" alt="Clinique vue 5" loading="lazy">
+                            <img src="./assets/images_clinique/IMG_2365.JPG.jpeg" alt="Clinique vue 6" loading="lazy">
+                            <img src="./assets/images_clinique/WhatsApp Image 2026-07-02 at 21.50.51.jpeg"
+                                alt="Clinique vue 7" loading="lazy">
+                        </div>
+                        <div class="carousel-overlay"></div>
+                        <div class="carousel-badge"><i class="fas fa-hospital"></i> Santé</div>
+                        <button class="carousel-arrow carousel-prev" aria-label="Précédent"><i
+                                class="fas fa-chevron-left"></i></button>
+                        <button class="carousel-arrow carousel-next" aria-label="Suivant"><i
+                                class="fas fa-chevron-right"></i></button>
+                        <div class="carousel-dots"></div>
+                    </div>
+                    <div class="project-body">
+                        <span class="badge" data-i18n="proj3Type">Construction Neuve</span>
+                        <h3 data-i18n="proj3Title">clinique</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> <span data-i18n="proj3Loc">bassam,
+                                Côte d'ivoire</span></p>
+                        <p class="desc" data-i18n="proj3Desc">Conception technique, calcul de structures et suivi de
+                            chantier pour un établissement de santé moderne aux normes médicales strictes.</p>
+                        <div class="project-tags"><span>Médical</span><span>Structure</span><span>Génie civil</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services section-pad bg-concrete">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow" data-i18n="servicesEyebrow">Ce que je fais</p>
+                <h2 data-i18n="servicesTitle">Mes Services</h2>
+                <div class="line"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon-wrap"><i class="fas fa-hammer"></i></div>
+                    <div class="service-content">
+                        <h3 data-i18n="serv1Title">Construction Neuve</h3>
+                        <p data-i18n="serv1Desc">Étude et exécution de fondations, structures béton, charpentes, pour
+                            tout type de bâtiment.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon-wrap"><i class="fas fa-tools"></i></div>
+                    <div class="service-content">
+                        <h3 data-i18n="serv2Title">Rénovation & Restructuration</h3>
+                        <p data-i18n="serv2Desc">Modification de structures existantes, reprises en sous-œuvre et
+                            réhabilitation complète.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon-wrap"><i class="fas fa-clipboard-list"></i></div>
+                    <div class="service-content">
+                        <h3 data-i18n="serv3Title">Suivi de Chantier</h3>
+                        <p data-i18n="serv3Desc">Pilotage OPPBC, gestion des sous-traitants, respect des budgets et
+                            livraisons dans les temps.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon-wrap"><i class="fas fa-drafting-compass"></i></div>
+                    <div class="service-content">
+                        <h3 data-i18n="serv4Title">Étude & Expertise</h3>
+                        <p data-i18n="serv4Desc">Audits techniques, modélisation BIM 3D (Revit), calculs de structures
+                            sécurisées.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section id="contact" class="contact section-pad">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow" data-i18n="contactEyebrow">Parlons de votre projet</p>
+                <h2 data-i18n="contactTitle">Me contacter</h2>
+                <div class="line"></div>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3 data-i18n="contactReady">Prêt à collaborer ?</h3>
+                    <p data-i18n="contactText">Que vous soyez une entreprise à la recherche de nouvelles compétences ou
+                        un particulier lançant son projet, discutons-en.</p>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <a href="mailto:contact@junior-ingenieur.com">kaelji929@gmail.com</a>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                        <a href="tel:+2250595166785">+225 05 95 16 67 85</a>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <span data-i18n="contactLoc">Abidjan , cocody.</span>
+                    </div>
+                    <div class="contact-social">
+                        <a href="https://www.linkedin.com/in/junior-konan-2ba09a30a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                            target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/leonjunior.konan" target="_blank" rel="noopener"
+                            aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group floating">
+                        <input type="text" id="name" placeholder=" " required>
+                        <label for="name" data-i18n="formName">Votre nom complet</label>
+                    </div>
+                    <div class="form-group floating">
+                        <input type="email" id="email" placeholder=" " required>
+                        <label for="email" data-i18n="formEmail">Votre adresse email</label>
+                    </div>
+                    <div class="form-group floating">
+                        <textarea id="message" rows="5" placeholder=" " required></textarea>
+                        <label for="message" data-i18n="formMessage">Votre message</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-i18n="btnSend">Envoyer le message</button>
+                    <p class="form-status" id="formStatus"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">KLJ<span>.</span></div>
+                <p class="footer-tagline" data-i18n="footerTagline">Ingénieur Bâtiment & Génie Civil</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/junior-konan-2ba09a30a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                        target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.facebook.com/leonjunior.konan" target="_blank" rel="noopener"
+                        aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year">2026</span> KONAN LEON JUNIOR. <span data-i18n="copyright">Tous droits
+                        réservés.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp CTA -->
+    <a href="https://wa.me/2250595166785" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+
+</html>
