@@ -32,7 +32,7 @@
 }
 
 /* ----- RESET ----- */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
   font-family: var(--font-main);
@@ -42,7 +42,7 @@ body {
   overflow-x: hidden;
 }
 h1,h2,h3,h4,h5 { font-family: var(--font-title); color: var(--c-slate); line-height: 1.2; }
-a, button { cursor: none; text-decoration: none; border: none; background: none; font-family: var(--font-main); }
+a, button { cursor: pointer; }
 img { max-width: 100%; height: auto; display: block; }
 
 .container { width: 90%; max-width: 1200px; margin: 0 auto; }

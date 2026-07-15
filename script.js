@@ -5,26 +5,13 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* --- 1. CUSTOM CURSOR --- */
-    const cursor = document.getElementById('custom-cursor');
-    const cursorDot = document.getElementById('custom-cursor-dot');
-    const links = document.querySelectorAll('a, button, .project-card, .service-item');
-
-    // Only apply if not on touch device strictly
-    if (window.matchMedia("(pointer: fine)").matches) {
-        document.addEventListener('mousemove', (e) => {
-            // Add a small delay/lerp to the main cursor for smoothness, instant for dot
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            cursorDot.style.left = e.clientX + 'px';
-            cursorDot.style.top = e.clientY + 'px';
-        });
-
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-    }
+    /* --- 1. EMAILJS INIT --- */
+    // ⚠️ Remplacez les valeurs ci-dessous par vos propres IDs EmailJS
+    // (https://www.emailjs.com → Account → API Keys)
+    const EMAILJS_PUBLIC_KEY  = 'VOTRE_PUBLIC_KEY';   // ex: 'aB1cD2eF3gH4iJ5k'
+    const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';   // ex: 'service_xxxxxxx'
+    const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';  // ex: 'template_xxxxxxx'
+    emailjs.init(EMAILJS_PUBLIC_KEY);
 
     /* --- 2. MOBILE MENU & STICKY NAV --- */
     const navbar = document.getElementById('navbar');
@@ -237,12 +224,40 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('contactForm').addEventListener('submit', e => {
         e.preventDefault();
-        const status = document.getElementById('formStatus');
-        const isEn   = currentLang === 'en';
-        status.textContent = isEn ? '✓ Thank you! Message sent.' : '✓ Merci ! Message envoyé.';
-        status.style.color = '#4A6FA5';
-        e.target.reset();
-        setTimeout(() => { status.textContent = ''; }, 5000);
+        const status  = document.getElementById('formStatus');
+        const btn     = e.target.querySelector('button[type="submit"]');
+        const isEn    = currentLang === 'en';
+
+        // Loading state
+        btn.disabled = true;
+        btn.textContent = isEn ? 'Sending…' : 'Envoi en cours…';
+        status.textContent = '';
+
+        const templateParams = {
+            from_name:    document.getElementById('name').value,
+            from_email:   document.getElementById('email').value,
+            message:      document.getElementById('message').value,
+            to_email:     'kaelji929@gmail.com'
+        };
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            .then(() => {
+                status.textContent = isEn ? '✓ Thank you! Message sent.' : '✓ Merci ! Message envoyé.';
+                status.style.color = '#2e7d52';
+                e.target.reset();
+                setTimeout(() => { status.textContent = ''; }, 6000);
+            })
+            .catch(err => {
+                console.error('EmailJS error:', err);
+                status.textContent = isEn
+                    ? '✗ Send failed. Please try again or email directly.'
+                    : '✗ Échec de l\'envoi. Réessayez ou contactez-moi directement.';
+                status.style.color = '#c0392b';
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.textContent = isEn ? 'Send Message' : 'Envoyer le message';
+            });
     });
 
 });
