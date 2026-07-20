@@ -1,15 +1,9 @@
-/**
- * PORTFOLIO — KONAN LEON JUNIOR
- * Cursor · Mobile Menu · i18n FR/EN · Scroll Reveal · Stats Counter · Three.js Hero
- */
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* --- 1. EMAILJS INIT --- */
-    const EMAILJS_PUBLIC_KEY = 'jS86s9Jpg2C_U4eLH';   // ⚠️ Remplacez ici
-    const EMAILJS_SERVICE_ID = 'service_karc18794';   // ex: service_xxxxxxx
-    const EMAILJS_TEMPLATE_ID = 'template_abfeswi';  // ex: template_xxxxxxx
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+    /* --- 1. CONFIGURATION EmailJS --- */
+    emailjs.init('6FxZm35UgvqDYk4fR'); // Clé publique EmailJS
 
     /* --- 2. MOBILE MENU & STICKY NAV --- */
     const navbar = document.getElementById('navbar');
@@ -222,31 +216,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('contactForm').addEventListener('submit', e => {
         e.preventDefault();
+        const form = e.target;
         const status = document.getElementById('formStatus');
-        const btn = e.target.querySelector('button[type="submit"]');
+        const btn = form.querySelector('button[type="submit"]');
         const isEn = currentLang === 'en';
 
         btn.disabled = true;
         btn.textContent = isEn ? 'Sending…' : 'Envoi en cours…';
         status.textContent = '';
 
-        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-            from_name: document.getElementById('name').value,
-            from_email: document.getElementById('email').value,
-            message: document.getElementById('message').value,
-            to_email: 'kaelji929@gmail.com'
-        })
+        emailjs.sendForm('service_8j118g5', 'template_578ijeh', form)
             .then(() => {
                 status.textContent = isEn ? '✓ Thank you! Message sent.' : '✓ Merci ! Message envoyé.';
                 status.style.color = '#2e7d52';
-                e.target.reset();
+                form.reset();
                 setTimeout(() => { status.textContent = ''; }, 6000);
             })
             .catch(err => {
                 console.error('EmailJS error:', err);
-                // Affiche l'erreur exacte renvoyée par le serveur
-                const errMsg = err.text || err.message || JSON.stringify(err);
-                status.textContent = 'Erreur détaillée : ' + errMsg;
+                status.textContent = isEn ? 'Oops! There was a problem.' : 'Oups ! Un problème est survenu.';
                 status.style.color = '#c0392b';
             })
             .finally(() => {

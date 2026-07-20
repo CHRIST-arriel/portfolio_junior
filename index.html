@@ -20,7 +20,7 @@
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
     <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="script.js" defer></script>
 </head>
 
@@ -376,15 +376,15 @@
                 </div>
                 <form class="contact-form" id="contactForm">
                     <div class="form-group floating">
-                        <input type="text" id="name" placeholder=" " required>
+                        <input type="text" id="name" name="name" placeholder=" " required>
                         <label for="name" data-i18n="formName">Votre nom complet</label>
                     </div>
                     <div class="form-group floating">
-                        <input type="email" id="email" placeholder=" " required>
+                        <input type="email" id="email" name="email" placeholder=" " required>
                         <label for="email" data-i18n="formEmail">Votre adresse email</label>
                     </div>
                     <div class="form-group floating">
-                        <textarea id="message" rows="5" placeholder=" " required></textarea>
+                        <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
                         <label for="message" data-i18n="formMessage">Votre message</label>
                     </div>
                     <button type="submit" class="btn btn-primary" data-i18n="btnSend">Envoyer le message</button>
